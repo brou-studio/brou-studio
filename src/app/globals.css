@@ -1,26 +1,329 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-main: #ffffff;
+  --text-primary: #1a1a1a;
+  --accent-red: #e63916;
+  --accent-red-hover: #b42d11;
+  --accent-orange: #f05a2e;
+  --accent-flame: #ff8c42;
+  --text-muted: #666666;
+  --border-subtle: rgba(0, 0, 0, 0.06);
+  --border-light: rgba(0, 0, 0, 0.08);
+  --border-medium: rgba(0, 0, 0, 0.1);
+  --easing: cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg-main: var(--bg-main);
+  --color-text-primary: var(--text-primary);
+  --color-accent-red: var(--accent-red);
+  --color-accent-red-hover: var(--accent-red-hover);
+  --color-accent-orange: var(--accent-orange);
+  --color-accent-flame: var(--accent-flame);
+  --color-text-muted: var(--text-muted);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-light: var(--border-light);
+  --color-border-medium: var(--border-medium);
+  --font-pixel: var(--font-press-start);
+  --font-body: var(--font-inter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-main);
+  color: var(--text-primary);
+  font-family: var(--font-body), system-ui, sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--accent-red);
+  color: #ffffff;
+}
+
+/* Loading screen */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  background: #000000;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 0 20px;
+  transition: opacity 0.6s var(--easing), visibility 0.6s var(--easing);
+}
+
+.loading-screen.loading-screen-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loading-pill {
+  padding: 6px 12px;
+  border-radius: 23px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 1.5px;
+  animation: loadingSequential 2s ease infinite;
+}
+
+@media (min-width: 640px) {
+  .loading-screen { gap: 8px; padding: 0; }
+  .loading-pill { padding: 8px 16px; font-size: 13px; }
+}
+
+.loading-pill:nth-child(1) { animation-delay: 0s; }
+.loading-pill:nth-child(2) { animation-delay: 0.5s; }
+.loading-pill:nth-child(3) { animation-delay: 1s; }
+.loading-pill:nth-child(4) { animation-delay: 1.5s; }
+
+@keyframes loadingSequential {
+  0%, 20% { opacity: 1; color: rgba(255, 255, 255, 1); border-color: rgba(255, 255, 255, 0.5); }
+  25%, 100% { opacity: 0.4; color: rgba(255, 255, 255, 0.5); border-color: rgba(255, 255, 255, 0.2); }
+}
+
+/* Hero entrance — whole block slides up with bouncy overshoot */
+.hero-entrance .hero-word-block {
+  opacity: 0;
+  transform: translateY(72px);
+}
+
+.hero-entered .hero-word-block {
+  opacity: 1;
+  transform: translateY(0);
+  transition: transform 0.8s cubic-bezier(1, -0.5, 0, 1.5),
+              opacity 0s;
+}
+
+/* Stagger — Line 1: IDEAS / QUE / VENDEN. */
+.hero-entered .hero-headline-line:nth-child(1) .hero-word-block:nth-child(1) { transition-delay: 0s; }
+.hero-entered .hero-headline-line:nth-child(1) .hero-word-block:nth-child(2) { transition-delay: 0.12s; }
+.hero-entered .hero-headline-line:nth-child(1) .hero-word-block:nth-child(3) { transition-delay: 0.24s; }
+
+/* Stagger — Line 2: SISTEMAS / QUE / ESCALAN. */
+.hero-entered .hero-headline-line:nth-child(2) .hero-word-block:nth-child(1) { transition-delay: 0.38s; }
+.hero-entered .hero-headline-line:nth-child(2) .hero-word-block:nth-child(2) { transition-delay: 0.50s; }
+.hero-entered .hero-headline-line:nth-child(2) .hero-word-block:nth-child(3) { transition-delay: 0.62s; }
+
+/* Hover on settled blocks */
+.hero-entered .hero-word-block {
+  cursor: default;
+}
+
+.hero-entered .hero-word-block:hover {
+  transform: translateY(-3px);
+  transition: transform 0.3s var(--easing);
+}
+
+/* Ticker entrance — slide up after headlines */
+.hero-entrance .hero-entrance-ticker {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.hero-entered .hero-entrance-ticker {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s var(--easing) 0.8s, transform 0.6s var(--easing) 0.8s;
+}
+
+/* CTA entrance — slide up after ticker */
+.hero-entrance .hero-entrance-cta {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.hero-entered .hero-entrance-cta {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s var(--easing) 0.95s, transform 0.6s var(--easing) 0.95s;
+}
+
+/* Footer entrance — appears early like ToyFight */
+.hero-entrance .hero-entrance-footer {
+  opacity: 0;
+}
+
+.hero-entered .hero-entrance-footer {
+  opacity: 1;
+  transition: opacity 0.5s var(--easing) 0.15s;
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s var(--easing), transform 0.8s var(--easing);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s; }
+.reveal-delay-3 { transition-delay: 0.45s; }
+
+/* Ticker animation */
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-track {
+  display: flex;
+  animation: ticker-scroll 20s linear infinite;
+  width: max-content;
+}
+
+/* CRT blink */
+@keyframes crt-blink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+.crt-blink {
+  animation: crt-blink 1.5s ease infinite;
+}
+
+/* Card hover */
+.project-card .project-title {
+  transform: translateY(11.55px);
+  transition: transform 0.667s var(--easing);
+}
+
+.project-card:hover .project-title {
+  transform: translateY(0);
+}
+
+/* Nav pill hover */
+.nav-pill {
+  transition: background 0.3s var(--easing), opacity 0.3s var(--easing);
+}
+
+.nav-pill:hover {
+  opacity: 0.7;
+}
+
+.nav-pill.active {
+  background: var(--accent-red) !important;
+}
+
+/* Page transition */
+.page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+}
+
+/* Service pill hover */
+.service-pill {
+  transition: background 0.3s var(--easing), color 0.3s var(--easing);
+}
+
+.service-pill:hover {
+  background: var(--text-primary);
+  color: #ffffff;
+}
+
+/* Button hover */
+.btn-primary {
+  transition: transform 0.3s var(--easing), box-shadow 0.3s var(--easing);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Link hover */
+.link-arrow {
+  transition: transform 0.3s var(--easing);
+  display: inline-block;
+}
+
+a:hover .link-arrow {
+  transform: translate(3px, -3px);
+}
+
+/* Smooth scroll sections */
+section {
+  scroll-margin-top: 80px;
+}
+
+/* ── Servicios page animations ── */
+
+/* Hero entrance */
+.svc-hero-title,
+.svc-hero-desc {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s var(--easing), transform 0.8s var(--easing);
+}
+
+.svc-hero-visible .svc-hero-title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.svc-hero-visible .svc-hero-desc {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.2s;
+}
+
+/* Service section scroll reveal */
+.svc-section .svc-image,
+.svc-section .svc-title,
+.svc-section .svc-pill,
+.svc-section .svc-desc,
+.svc-section .svc-work {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.svc-visible .svc-image {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s var(--easing), transform 0.7s var(--easing);
+}
+
+.svc-visible .svc-title {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s var(--easing) 0.05s, transform 0.7s var(--easing) 0.05s;
+}
+
+.svc-visible .svc-pill {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s var(--easing), transform 0.5s var(--easing),
+              background 0.3s var(--easing), color 0.3s var(--easing);
+}
+
+.svc-visible .svc-desc {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s var(--easing) 0.5s, transform 0.7s var(--easing) 0.5s;
+}
+
+.svc-visible .svc-work {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s var(--easing) 0.6s, transform 0.7s var(--easing) 0.6s;
 }
