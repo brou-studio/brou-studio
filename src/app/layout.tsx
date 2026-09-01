@@ -14,7 +14,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "BROU. Studio — Ideas que venden, sistemas que escalan",
+  title: "BROU STUDIO",
   description:
     "Agencia creativa en Lima, Peru. Branding, diseno web, marketing digital e inteligencia artificial.",
 };
