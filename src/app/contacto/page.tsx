@@ -21,22 +21,29 @@ export default function Contacto() {
     <div className="min-h-screen bg-bg-main">
       <Nav />
 
-      {/* Main content — two columns */}
-      <div className="px-5 md:px-8 lg:px-12 pt-1">
-        <div className="flex flex-col lg:flex-row gap-2 lg:gap-4 items-start">
+      {/* Main content */}
+      <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-4 md:pt-6 lg:pt-8">
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-[4%] items-start">
+
           {/* LEFT COLUMN: Hero + cards + mascot */}
           <ScrollReveal className="flex-1 w-full">
-            <div className="font-pixel text-[10px] md:text-xs text-text-primary tracking-wider mb-0.5">
+            <div className="font-pixel text-[10px] md:text-xs text-text-primary tracking-wider mb-2">
               HABLEMOS DE TU PROYECTO
               <span className="text-accent-red ml-1">.</span>
             </div>
-            <h1 className="font-pixel text-[28px] sm:text-[36px] md:text-[44px] lg:text-[52px] text-text-primary leading-[1.05] mb-1">
+            <h1
+              className="font-pixel text-text-primary leading-[1.1] mb-3"
+              style={{ fontSize: "clamp(1.5rem, 4vw, 3.5rem)" }}
+            >
               TU IDEA PUEDE
               <br />
               <span className="text-accent-red">CAMBIAR TODO</span>
               <span className="text-text-primary">.</span>
             </h1>
-            <p className="text-sm md:text-[15px] text-text-muted leading-snug mb-2 max-w-[420px]">
+            <p
+              className="text-text-muted leading-relaxed mb-4 lg:mb-6 max-w-[500px]"
+              style={{ fontSize: "clamp(0.8rem, 1.2vw, 1rem)" }}
+            >
               Cuéntanos tu proyecto y hagamos juntos un sistema que{" "}
               <span className="text-accent-red font-medium">venda</span>,{" "}
               <span className="text-accent-red font-medium">escale</span> y
@@ -45,7 +52,7 @@ export default function Contacto() {
             </p>
 
             {/* Value cards 2x2 */}
-            <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 mb-1">
+            <div className="grid grid-cols-2 gap-x-4 gap-y-3 mb-4 lg:mb-6">
               {[
                 { icon: "bolt", title: "IDEAS QUE\nVENDEN", desc: "Estrategias que convierten." },
                 { icon: "gear", title: "AUTOMATIZACIÓN\nINTELIGENTE", desc: "Procesos que trabajan por ti." },
@@ -60,7 +67,7 @@ export default function Contacto() {
                     <div className="font-pixel text-[8px] md:text-[9px] text-text-primary leading-snug whitespace-pre-line">
                       {item.title}
                     </div>
-                    <div className="text-[10px] text-text-muted mt-0.5">
+                    <div className="text-[10px] md:text-[11px] text-text-muted mt-0.5">
                       {item.desc}
                     </div>
                   </div>
@@ -68,11 +75,11 @@ export default function Contacto() {
               ))}
             </div>
 
-            {/* Mascot with speech bubble */}
-            <div className="flex items-end gap-2">
+            {/* Mascot with speech bubble — hidden on mobile, shown on lg+ */}
+            <div className="hidden lg:flex items-end gap-3">
               <div className="relative self-center">
                 <div className="absolute -top-2.5 -left-1 text-accent-red text-lg">&#9829;</div>
-                <div className="bg-white border border-border-light rounded-xl px-2.5 py-1.5 mb-1 relative max-w-[170px]">
+                <div className="bg-white border border-border-light rounded-xl px-3 py-2 mb-1 relative max-w-[180px]">
                   <p className="font-pixel text-[7px] md:text-[8px] text-text-primary leading-snug">
                     ¡Cuéntame tu idea!<br />Estoy listo para<br />hacerla realidad.
                   </p>
@@ -84,16 +91,16 @@ export default function Contacto() {
                 alt="Brou mascota"
                 width={280}
                 height={320}
-                className="drop-shadow-xl w-[120px] sm:w-[140px] md:w-[170px] lg:w-[200px] h-auto"
+                className="drop-shadow-xl h-auto"
+                style={{ width: "clamp(140px, 12vw, 220px)" }}
               />
             </div>
           </ScrollReveal>
 
-          {/* RIGHT COLUMN: Form only */}
-          <div className="w-full lg:w-[460px] xl:w-[500px] flex-shrink-0">
-            {/* Form card */}
+          {/* RIGHT COLUMN: Form */}
+          <div className="w-full lg:w-[48%] xl:w-[45%] flex-shrink-0">
             <ScrollReveal delay={1}>
-              <div className="bg-text-primary rounded-2xl p-5 md:p-6">
+              <div className="bg-text-primary rounded-2xl p-5 sm:p-6 md:p-8">
                 {/* Terminal header */}
                 <div className="flex items-center justify-between mb-5">
                   <div className="font-pixel text-[10px] md:text-xs text-white/80 tracking-wider">
@@ -107,7 +114,7 @@ export default function Contacto() {
                 </div>
 
                 {/* Name + Email */}
-                <div className="grid grid-cols-2 gap-4 mb-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                   <div>
                     <label className="font-pixel text-[9px] md:text-[10px] text-white/60 tracking-wider mb-1.5 block">NOMBRE</label>
                     <input type="text" placeholder="Tu nombre" className="w-full bg-white/10 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder:text-white/30 outline-none focus:border-accent-red transition-colors" />
@@ -121,7 +128,7 @@ export default function Contacto() {
                 {/* Service selector */}
                 <div className="mb-4">
                   <label className="font-pixel text-[9px] md:text-[10px] text-white/60 tracking-wider mb-2 block">¿QUÉ NECESITAS?</label>
-                  <div className="flex flex-wrap gap-2.5">
+                  <div className="flex flex-wrap gap-2">
                     {services.map((svc) => (
                       <button
                         key={svc.id}
@@ -167,13 +174,32 @@ export default function Contacto() {
                 </p>
               </div>
             </ScrollReveal>
-
           </div>
         </div>
 
-        {/* Contact cards — full width below both columns */}
-        <ScrollReveal delay={2} className="mt-1.5 lg:mt-2">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5 md:gap-2">
+        {/* Mascot mobile — shown below form on small screens */}
+        <div className="flex lg:hidden justify-center items-end gap-3 mt-6">
+          <div className="relative self-center">
+            <div className="absolute -top-2.5 -left-1 text-accent-red text-lg">&#9829;</div>
+            <div className="bg-white border border-border-light rounded-xl px-3 py-2 mb-1 relative max-w-[180px]">
+              <p className="font-pixel text-[7px] text-text-primary leading-snug">
+                ¡Cuéntame tu idea!<br />Estoy listo para<br />hacerla realidad.
+              </p>
+              <div className="absolute -bottom-1.5 left-5 w-2.5 h-2.5 bg-white border-r border-b border-border-light rotate-45" />
+            </div>
+          </div>
+          <Image
+            src="/images/mascota/BROU.png"
+            alt="Brou mascota"
+            width={280}
+            height={320}
+            className="drop-shadow-xl w-[150px] sm:w-[180px] h-auto"
+          />
+        </div>
+
+        {/* Contact cards */}
+        <ScrollReveal delay={2} className="mt-6 lg:mt-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
               { icon: "whatsapp", label: "WHATSAPP", desc: "Respuesta rápida\nen menos de 1 hora", href: "https://wa.me/+51904495146" },
               { icon: "instagram", label: "INSTAGRAM", desc: "Conoce nuestro\ntrabajo diario", href: "https://www.instagram.com/broustudio" },
@@ -187,7 +213,7 @@ export default function Contacto() {
       </div>
 
       {/* Ticker */}
-      <div className="border-t border-border-light py-2 mt-0.5 overflow-hidden">
+      <div className="border-t border-border-light py-3 mt-6 overflow-hidden">
         <div className="ticker-track">
           {Array.from({ length: 4 }).map((_, i) => (
             <div key={i} className="flex items-center gap-4 px-2">
@@ -202,7 +228,7 @@ export default function Contacto() {
       </div>
 
       {/* Bottom CTA */}
-      <div className="px-5 md:px-8 lg:px-12 py-2 flex justify-center">
+      <div className="px-4 sm:px-6 md:px-8 lg:px-12 py-4 flex justify-center">
         <a
           href="https://wa.me/+51904495146?text=Hola%2C%20quiero%20hablar%20sobre%20mi%20proyecto"
           target="_blank"
@@ -242,7 +268,7 @@ function ContactCard({ icon, label, desc, href }: { icon: string; label: string;
   };
 
   const content = (
-    <div className="border border-border-light rounded-xl p-3 text-center hover:border-border-medium transition-colors h-full">
+    <div className="border border-border-light rounded-xl p-3 md:p-4 text-center hover:border-border-medium transition-colors h-full">
       <div className="flex justify-center mb-2">{iconMap[icon]}</div>
       <div className="font-pixel text-[8px] md:text-[9px] text-text-primary tracking-wider mb-1">{label}</div>
       <div className="text-[10px] md:text-[11px] text-text-muted leading-relaxed whitespace-pre-line">{desc}</div>

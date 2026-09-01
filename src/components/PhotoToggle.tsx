@@ -25,14 +25,14 @@ export default function PhotoToggle({
   };
 
   return (
-    <div className="w-full aspect-[4/5] sm:aspect-[3/4] md:aspect-square bg-[#e8e4dd] rounded-xl overflow-hidden relative group">
+    <div className="w-full aspect-square bg-[#e8e4dd] rounded-xl overflow-hidden relative group">
       <Image
         src={realSrc}
         alt={alt}
         fill
-        className={`object-cover object-top transition-opacity duration-500 ${
+        className={`object-cover object-[center_10%] sm:object-[center_15%] lg:object-[center_20%] transition-opacity duration-500 ${
           showPlush ? "opacity-0" : "opacity-100"
-        }`}
+        } scale-[1.5] sm:scale-[1.3] lg:scale-100`}
       />
       <Image
         src={plushSrc}

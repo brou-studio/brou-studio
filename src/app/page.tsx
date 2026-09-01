@@ -1,11 +1,11 @@
 "use client";
 
 import Nav from "@/components/Nav";
-import HeroParallax from "@/components/HeroParallax";
 import Ticker from "@/components/Ticker";
 import LoadingScreen from "@/components/LoadingScreen";
 import HeroEntrance from "@/components/HeroEntrance";
 import ScrambleText from "@/components/ScrambleText";
+import Image from "next/image";
 import Link from "next/link";
 
 const heroWords = [
@@ -22,7 +22,17 @@ export default function Home() {
         <Nav />
 
         <div className="flex-1 flex flex-col">
-          <HeroParallax />
+          {/* Hero mascot — static */}
+          <div className="flex justify-center items-center pb-0 relative z-20 -mt-2 sm:-mt-3 md:-mt-4 lg:-mt-5 -mb-1 sm:-mb-1.5 md:-mb-2 lg:-mb-2.5">
+            <Image
+              src="/images/mascota/BROU-trimmed.png"
+              alt="Brou — mascota de Brou Studio"
+              width={520}
+              height={520}
+              priority
+              className="w-[280px] sm:w-[360px] md:w-[440px] lg:w-[520px] h-auto drop-shadow-xl"
+            />
+          </div>
 
           <HeroEntrance>
             {/* Headline Blocks */}
