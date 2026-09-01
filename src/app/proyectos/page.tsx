@@ -24,6 +24,7 @@ const projects = [
     services: "Branding + Web + Marketing + Brou AI",
     tags: ["Branding", "Web", "Marketing", "AI"],
     heroImage: "/images/proyectos/excelsior/HERO.png",
+    cardBg: "#0a0a0a",
   },
   {
     slug: "maffia",
@@ -32,6 +33,7 @@ const projects = [
     services: "Branding + Marketing Digital + Brou AI",
     tags: ["Branding", "Marketing", "AI"],
     heroImage: "/images/proyectos/maffia/HERO.png",
+    cardBg: "#1a1a1a",
   },
   {
     slug: "la-casa-de-las-narices",
@@ -40,6 +42,7 @@ const projects = [
     services: "Marketing Digital + Meta Ads + Contenido",
     tags: ["Marketing"],
     heroImage: "/images/proyectos/la-casa-de-las-narices/HERO.png",
+    cardBg: "#1a1a1a",
   },
   {
     slug: "jachita",
@@ -47,7 +50,8 @@ const projects = [
     subtitle: "RESTAURANTE",
     services: "Branding + Identidad Visual",
     tags: ["Branding"],
-    heroImage: null,
+    heroImage: "/images/proyectos/jachita/JACHITA.png",
+    cardBg: "#b8a99a",
   },
 ];
 
@@ -133,14 +137,14 @@ export default function Proyectos() {
               href={`/proyectos/${project.slug}`}
               className="project-card flex-shrink-0 w-[220px] sm:w-[260px] md:w-[280px] lg:w-[320px] no-underline group"
             >
-              {/* Card — black background with centered image */}
-              <div className="w-full aspect-[4/3] bg-[#1a1a1a] rounded-xl overflow-hidden flex items-center justify-center relative">
+              {/* Card */}
+              <div className="w-full aspect-[4/3] rounded-xl overflow-hidden flex items-center justify-center relative" style={{ backgroundColor: project.cardBg || "#1a1a1a" }}>
                 {project.heroImage ? (
                   <Image
                     src={project.heroImage}
                     alt={project.name}
                     fill
-                    className="object-contain p-4 group-hover:scale-105 transition-transform duration-700"
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                 ) : (
                   <div className="text-center px-4">
@@ -154,11 +158,11 @@ export default function Proyectos() {
                 )}
               </div>
               {/* Title below card */}
-              <div className="pt-3">
+              <div className="pt-2 md:pt-3">
                 <div className="project-title font-pixel text-[11px] md:text-xs text-text-primary">
                   {project.name}
                 </div>
-                <div className="text-[11px] md:text-[12px] text-text-muted mt-1">
+                <div className="text-[11px] md:text-[12px] text-text-muted mt-3 md:mt-4">
                   {project.services}
                 </div>
               </div>
